@@ -5,7 +5,7 @@ A collection of useful utilities to make development with Deno even easier!
 ## Usage
 
 ```js
-import easy from "https://deno.land/x/easyutil@0.1.0/mod.ts";
+import easy from "https://deno.land/x/easyutil@0.2.0/mod.ts";
 ```
 
 ## Functions
@@ -25,6 +25,12 @@ const rmt = easy.rmtrim(str, ['/', '\\']);
 const t = easy.wtrim(str, 'word');
 const lwt = easy.lwtrim(str, 'word');
 const rwt = easy.rwtrim(str, 'word');
+```
+
+### Sleep
+
+```js
+easy.sleep(1000);
 ```
 
 ## Tests

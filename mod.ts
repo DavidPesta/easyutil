@@ -1,4 +1,5 @@
 import * as trim from "./trim.ts";
+import * as sleep from "./sleep.ts";
 
 export default {
 	trim: trim.trim,
@@ -9,5 +10,6 @@ export default {
 	rmtrim: trim.rmtrim,
 	wtrim: trim.wtrim,
 	lwtrim: trim.lwtrim,
-	rwtrim: trim.rwtrim
+	rwtrim: trim.rwtrim,
+	sleep: sleep.sleep
 };
