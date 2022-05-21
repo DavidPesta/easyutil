@@ -1,5 +1,6 @@
-import * as trim from "./trim.ts";
-import * as sleep from "./sleep.ts";
+import * as trim from "./lib/trim.ts";
+import * as sleep from "./lib/sleep.ts";
+import * as stc from "./lib/string_type_checks.ts";
 
 export default {
 	trim: trim.trim,
@@ -11,5 +12,7 @@ export default {
 	wtrim: trim.wtrim,
 	lwtrim: trim.lwtrim,
 	rwtrim: trim.rwtrim,
-	sleep: sleep.sleep
+	sleep: sleep.sleep,
+	isString: stc.isString,
+	isNumberString: stc.isNumberString
 };
