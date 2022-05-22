@@ -329,3 +329,53 @@ Deno.test("easy.string.isA.decimal", () => {
 	const integer = "5";
 	assertThrows(() => easy.string.isA.decimal(integer));
 });
+
+Deno.test("easy.string.isA.boolean", () => {
+	const trueLower = "true";
+	assert(easy.string.isA.boolean(trueLower));
+	
+	const trueUpper = "TRUE";
+	assert(easy.string.isA.boolean(trueUpper));
+	
+	const trueMiXeD = "TrUe";
+	assert(easy.string.isA.boolean(trueMiXeD));
+	
+	const falseLower = "false";
+	assert(easy.string.isA.boolean(falseLower));
+	
+	const falseUpper = "FALSE";
+	assert(easy.string.isA.boolean(falseUpper));
+	
+	const falseMiXeD = "FaLsE";
+	assert(easy.string.isA.boolean(falseMiXeD));
+	
+	const tLower = "t";
+	assert(easy.string.isA.boolean(tLower));
+	
+	const tUpper = "T";
+	assert(easy.string.isA.boolean(tUpper));
+	
+	const fLower = "f";
+	assert(easy.string.isA.boolean(fLower));
+	
+	const fUpper = "F";
+	assert(easy.string.isA.boolean(fUpper));
+	
+	const one = "1";
+	assert(easy.string.isA.boolean(one));
+	
+	const zero = "0";
+	assert(easy.string.isA.boolean(zero));
+	
+	const startsWithT = "truish";
+	assertFalse(easy.string.isA.boolean(startsWithT));
+	
+	const startsWithF = "falsy";
+	assertFalse(easy.string.isA.boolean(startsWithF));
+	
+	const eleven = "11";
+	assertFalse(easy.string.isA.boolean(eleven));
+	
+	const double07 = "007";
+	assertFalse(easy.string.isA.boolean(double07));
+});

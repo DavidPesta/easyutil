@@ -45,5 +45,22 @@ export default {
 	// deno-lint-ignore no-unused-vars
 	decimal: (str: string): boolean => {
 		throw new Error("Use easy.string.isA.number instead. Consider, all real numbers qualify as a decimal. For example, the integer 5 is numerically indistinguishable from the decimal 5.0 or 5,0.");
+	},
+	
+	boolean: (str: string): boolean => {
+		const lowerStr = str.toLowerCase();
+		
+		if (
+			lowerStr === "true" ||
+			lowerStr === "false" ||
+			lowerStr === "t" ||
+			lowerStr === "f" ||
+			str === "1" ||
+			str === "0"
+		) {
+			return true;
+		}
+		
+		return false;
 	}
 }
