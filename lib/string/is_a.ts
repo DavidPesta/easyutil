@@ -6,6 +6,8 @@
 // appears only once, then it could be anywhere. Utilities to help detect number systems, etc.
 // Nice article on decimal separators: https://en.wikipedia.org/wiki/Decimal_separator
 
+import easy from "../../mod.ts";
+
 export default {
 	// NOTE: The string check seems pointless if you are using TypeScript with "string" type hints.
 	//       However, it might come in handy in edge cases where you work with an undefined type.
@@ -22,6 +24,20 @@ export default {
 		if (isNaN(parsed)) return false;
 		if (str.trim() !== str) return false;
 		return true;
+	},
+	
+	integer: (str: string): boolean => {
+		if (+str !== +str) return false;
+		if (str.trim() !== str) return false;
+		
+		let trimmedZeroStr = easy.string.trim.charsRight(str, ["0"]);
+		trimmedZeroStr = easy.string.trim.charsRight(trimmedZeroStr, ["."]);
+		if (trimmedZeroStr.indexOf(".") != -1) return false;
+		
+		const parsed = parseFloat(str);
+		if (parsed === Infinity) return false;
+		const rounded = Math.round(parsed);
+		return rounded == parsed;
 	},
 	
 	// WARNING: This function is designed to break. Use easy.string.isA.number instead.
