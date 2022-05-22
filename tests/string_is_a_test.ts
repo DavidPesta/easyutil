@@ -9,7 +9,6 @@ Deno.test("easy.string.isA.string", () => {
 	assertThrows(() => easy.string.isA.string(strobj));
 });
 
-// Nice article on decimal separators: https://en.wikipedia.org/wiki/Decimal_separator
 Deno.test("easy.string.isA.number", () => {
 	const integer = "5";
 	assert(easy.string.isA.number(integer));
@@ -35,8 +34,11 @@ Deno.test("easy.string.isA.number", () => {
 	const lotsOfZeroDecimals = "5.000000000";
 	assert(easy.string.isA.number(lotsOfZeroDecimals));
 	
-	const infiniteNumber = "1e10000";
-	assert(easy.string.isA.number(infiniteNumber));
+	const veryBigNumber = "1e100";
+	assert(easy.string.isA.number(veryBigNumber));
+	
+	const infiniteNumber = "1e1000";
+	assertFalse(easy.string.isA.number(infiniteNumber)); // Can't be parsed into a usable number.
 	
 	const exponent = "123e5";
 	assert(easy.string.isA.number(exponent));
@@ -47,54 +49,53 @@ Deno.test("easy.string.isA.number", () => {
 	const lotsOfDigits = "8435784398523729857394573459834725894375894357834925739485734985723957435824735893275349573285734295437285732953275934573493";
 	assert(easy.string.isA.number(lotsOfDigits));
 	
-	// Commas are used to separate numbers for human clarity. Allow humans to do this however they want. Commas are also used as decimals.
+	const commaNumber1 = "5,005";
+	assertFalse(easy.string.isA.number(commaNumber1));
 	
-	const commaNumber1 = "5,000";
-	assert(easy.string.isA.number(commaNumber1));
+	const commaNumber2 = "50,05";
+	assertFalse(easy.string.isA.number(commaNumber2));
 	
-	const commaNumber2 = "50,00";
-	assert(easy.string.isA.number(commaNumber2));
+	const commaNumber3 = "500,5";
+	assertFalse(easy.string.isA.number(commaNumber3));
 	
-	const commaNumber3 = "500,0";
-	assert(easy.string.isA.number(commaNumber3));
-	
-	const commaNumber4 = ",,,,,,,,5,,,,0,,,,,,,,,,0,,,,,0,,,,,";
-	assert(easy.string.isA.number(commaNumber4));
-	
-	// Periods are used to separate numbers for human clarity. Allow humans to do this however they want. Periods are also used as decimals.
+	const commaNumber4 = ",,,,,,,,5,,,,0,,,,,,,,,,0,,,,,5,,,,,";
+	assertFalse(easy.string.isA.number(commaNumber4));
 	
 	const twoDecimals = "1.2.3";
-	assert(easy.string.isA.number(twoDecimals));
+	assertFalse(easy.string.isA.number(twoDecimals));
 	
 	const twoAdjacentDecimals = "5..6";
-	assert(easy.string.isA.number(twoAdjacentDecimals));
+	assertFalse(easy.string.isA.number(twoAdjacentDecimals));
 	
 	const twoLeadingDecimals = "..5";
-	assert(easy.string.isA.number(twoLeadingDecimals));
+	assertFalse(easy.string.isA.number(twoLeadingDecimals));
 	
 	const twoTrailingDecimals = "5..";
-	assert(easy.string.isA.number(twoTrailingDecimals));
+	assertFalse(easy.string.isA.number(twoTrailingDecimals));
 	
 	const lotsOfDecimals = "...5.....5...";
-	assert(easy.string.isA.number(lotsOfDecimals));
+	assertFalse(easy.string.isA.number(lotsOfDecimals));
 	
-	// Spaces are the internationally recommended thousands separator, so again, allow humans to use them however they want.
+	const bothCommasAndDots = "5,000.00";
+	assertFalse(easy.string.isA.number(bothCommasAndDots));
 	
 	const spaceSeparatedNumber = "5 000";
-	assert(easy.string.isA.number(spaceSeparatedNumber));
+	assertFalse(easy.string.isA.number(spaceSeparatedNumber));
 	
 	const spaceSeparatedBigNumber = "5 000 000 000 000 000 000 000";
-	assert(easy.string.isA.number(spaceSeparatedBigNumber));
+	assertFalse(easy.string.isA.number(spaceSeparatedBigNumber));
 	
-	const leftPaddedNumber = " 5";
-	assert(easy.string.isA.number(leftPaddedNumber));
+	const paddedNumber = "  5  ";
+	assertFalse(easy.string.isA.number(paddedNumber));
 	
-	const rightPaddedNumber = "5 ";
-	assert(easy.string.isA.number(rightPaddedNumber));
+	const leftPaddedNumber = "  5";
+	assertFalse(easy.string.isA.number(leftPaddedNumber));
 	
-	// Underbars are a somewhat common separator among programmers.
+	const rightPaddedNumber = "5  ";
+	assertFalse(easy.string.isA.number(rightPaddedNumber));
+	
 	const underbars = "5_000_000";
-	assert(easy.string.isA.number(underbars));
+	assertFalse(easy.string.isA.number(underbars));
 	
 	// Why would this be more offensive than 5.000000? Why the bias against unnecessary zeroes on the left of the decimal?
 	const leadingZeros = "00000005";
@@ -116,7 +117,7 @@ Deno.test("easy.string.isA.number", () => {
 	assert(easy.string.isA.number(negativeDecimal));
 	
 	const negativeWithSpace = "- 5";
-	assert(easy.string.isA.number(negativeWithSpace));
+	assertFalse(easy.string.isA.number(negativeWithSpace));
 	
 	const str = "happy";
 	assertFalse(easy.string.isA.number(str));
@@ -161,4 +162,9 @@ Deno.test("easy.string.isA.number", () => {
 	
 	const wat = " \u00A0   \t\n\r";
 	assertFalse(easy.string.isA.number(wat));
+});
+
+Deno.test("easy.string.isA.decimal", () => {
+	const decimal = "5.5";
+	assertThrows(() => easy.string.isA.decimal(decimal));
 });
