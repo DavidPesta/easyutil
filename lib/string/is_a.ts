@@ -19,25 +19,27 @@ export default {
 	
 	number: (str: string): boolean => {
 		if (+str !== +str) return false;
-		const parsed = parseFloat(str);
-		if (parsed === Infinity) return false;
-		if (isNaN(parsed)) return false;
-		if (str.trim() !== str) return false;
+		if (isNaN(Number(str))) return false;
+		if (str.trim() === "") return false;
+		if (str === "Infinity") return false;
+		if (str === "-Infinity") return false;
 		return true;
 	},
 	
 	integer: (str: string): boolean => {
 		if (+str !== +str) return false;
-		if (str.trim() !== str) return false;
+		if (str.trim() === "") return false;
+		if (str === "Infinity") return false;
+		if (str === "-Infinity") return false;
+		
+		const parsed = Number(str);
+		if (isNaN(parsed)) return false;
 		
 		let trimmedZeroStr = easy.string.trim.charsRight(str, ["0"]);
 		trimmedZeroStr = easy.string.trim.charsRight(trimmedZeroStr, ["."]);
 		if (trimmedZeroStr.indexOf(".") != -1) return false;
 		
-		const parsed = parseFloat(str);
-		if (parsed === Infinity) return false;
-		const rounded = Math.round(parsed);
-		return rounded == parsed;
+		return Math.round(parsed) === parsed;
 	},
 	
 	// WARNING: This function is designed to break. Use easy.string.isA.number instead.

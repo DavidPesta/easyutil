@@ -1,5 +1,5 @@
 import easy from "../mod.ts";
-import { assert, assertFalse, assertThrows } from "https://deno.land/std@0.139.0/testing/asserts.ts";
+import { assert, assertFalse, assertThrows } from "https://deno.land/std@0.140.0/testing/asserts.ts";
 
 Deno.test("easy.string.isA.string", () => {
 	const str = "some string";
@@ -38,7 +38,10 @@ Deno.test("easy.string.isA.number", () => {
 	assert(easy.string.isA.number(veryBigNumber));
 	
 	const infiniteNumber = "1e1000";
-	assertFalse(easy.string.isA.number(infiniteNumber)); // Can't be parsed into a usable number.
+	assert(easy.string.isA.number(infiniteNumber));
+	
+	const infiniteNegativeNumber = "-1e1000";
+	assert(easy.string.isA.number(infiniteNegativeNumber));
 	
 	const exponent = "123e5";
 	assert(easy.string.isA.number(exponent));
@@ -86,13 +89,13 @@ Deno.test("easy.string.isA.number", () => {
 	assertFalse(easy.string.isA.number(spaceSeparatedBigNumber));
 	
 	const paddedNumber = "  5  ";
-	assertFalse(easy.string.isA.number(paddedNumber));
+	assert(easy.string.isA.number(paddedNumber));
 	
 	const leftPaddedNumber = "  5";
-	assertFalse(easy.string.isA.number(leftPaddedNumber));
+	assert(easy.string.isA.number(leftPaddedNumber));
 	
 	const rightPaddedNumber = "5  ";
-	assertFalse(easy.string.isA.number(rightPaddedNumber));
+	assert(easy.string.isA.number(rightPaddedNumber));
 	
 	const underbars = "5_000_000";
 	assertFalse(easy.string.isA.number(underbars));
@@ -143,10 +146,11 @@ Deno.test("easy.string.isA.number", () => {
 	const booleanFalse = "false";
 	assertFalse(easy.string.isA.number(booleanFalse));
 	
-	// Infinity is not a number. Infinity is a concept. If someone says that infinity is a number, ask them, "which number is it?"
-	// In math, there are "large infinities" and there are "small infinities" and they are not the same. Again, which number do they represent?
 	const infinity = "Infinity";
 	assertFalse(easy.string.isA.number(infinity));
+	
+	const negativeInfinity = "-Infinity";
+	assertFalse(easy.string.isA.number(negativeInfinity));
 	
 	const lowercaseInfinity = "infinity";
 	assertFalse(easy.string.isA.number(lowercaseInfinity));
@@ -189,7 +193,10 @@ Deno.test("easy.string.isA.integer", () => {
 	assert(easy.string.isA.integer(veryBigNumber));
 	
 	const infiniteNumber = "1e1000";
-	assertFalse(easy.string.isA.integer(infiniteNumber)); // Can't be parsed into a usable number.
+	assert(easy.string.isA.integer(infiniteNumber));
+	
+	const infiniteNegativeNumber = "-1e1000";
+	assert(easy.string.isA.integer(infiniteNegativeNumber));
 	
 	const exponent = "123e5";
 	assert(easy.string.isA.integer(exponent));
@@ -246,13 +253,13 @@ Deno.test("easy.string.isA.integer", () => {
 	assertFalse(easy.string.isA.integer(spaceSeparatedBigNumber));
 	
 	const paddedNumber = "  5  ";
-	assertFalse(easy.string.isA.integer(paddedNumber));
+	assert(easy.string.isA.integer(paddedNumber));
 	
 	const leftPaddedNumber = "  5";
-	assertFalse(easy.string.isA.integer(leftPaddedNumber));
+	assert(easy.string.isA.integer(leftPaddedNumber));
 	
 	const rightPaddedNumber = "5  ";
-	assertFalse(easy.string.isA.integer(rightPaddedNumber));
+	assert(easy.string.isA.integer(rightPaddedNumber));
 	
 	const underbars = "5_000_000";
 	assertFalse(easy.string.isA.integer(underbars));
@@ -303,10 +310,11 @@ Deno.test("easy.string.isA.integer", () => {
 	const booleanFalse = "false";
 	assertFalse(easy.string.isA.integer(booleanFalse));
 	
-	// Infinity is not a number. Infinity is a concept. If someone says that infinity is a number, ask them, "which number is it?"
-	// In math, there are "large infinities" and there are "small infinities" and they are not the same. Again, which number do they represent?
 	const infinity = "Infinity";
 	assertFalse(easy.string.isA.integer(infinity));
+	
+	const negativeInfinity = "-Infinity";
+	assertFalse(easy.string.isA.integer(negativeInfinity));
 	
 	const lowercaseInfinity = "infinity";
 	assertFalse(easy.string.isA.integer(lowercaseInfinity));
