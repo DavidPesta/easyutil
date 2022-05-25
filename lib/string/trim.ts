@@ -1,3 +1,7 @@
+// Code borrowed from:
+// Jason Larke: https://stackoverflow.com/users/1280370/jason-larke
+// Stack Overflow answer: https://stackoverflow.com/a/55292366/508558
+
 function hasSubstringAt(str: string, substr: string, pos: number): boolean {
 	let idx = 0;
 	const len = substr.length;

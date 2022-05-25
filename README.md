@@ -31,9 +31,6 @@ const bool = easy.string.parse.boolean(str);
 
 ### String Trim
 
-Inspiration and code bits borrowed from [Jason Larke's](https://stackoverflow.com/users/1280370/jason-larke) Stack Overflow answer here:
-https://stackoverflow.com/a/55292366/508558
-
 ```js
 const trimmed = easy.string.trim.charsBoth(str, ['/', '\\']);
 const leftTrimmed = easy.string.trim.charsLeft(str, ['/', '\\']);
