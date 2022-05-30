@@ -1,5 +1,5 @@
 import easy from "../mod.ts";
-import { assertEquals } from "https://deno.land/std@0.140.0/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.141.0/testing/asserts.ts";
 
 Deno.test("easy.string.trim.charsBoth", () => {
 	const t = easy.string.trim.charsBoth("-/-trim-hyphens-/-", ["-", "/"]);

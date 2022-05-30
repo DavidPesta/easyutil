@@ -1,5 +1,5 @@
 import easy from "../mod.ts";
-import { assertEquals } from "https://deno.land/std@0.140.0/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.141.0/testing/asserts.ts";
 
 Deno.test("easy.string.parse.number", () => {
 	const integer = "5";
@@ -332,13 +332,75 @@ Deno.test("easy.string.parse.boolean", () => {
 	assertEquals(easy.string.parse.boolean(double07), false);
 });
 
-Deno.test("easy.string.parse.urlParams", () => {
-	const obj1 = easy.string.parse.urlParams("?var1=one&var2=two&var3=three");
+Deno.test("easy.string.parse.url", () => {
+	const url1Info = easy.string.parse.url("proto://sub1.sub2.dom.tld:80/path/to/file.ext?query#frag");
+	assertEquals(url1Info["protocol"], "proto");
+	assertEquals(url1Info["subdomain"], "sub1.sub2");
+	assertEquals(url1Info["domain"], "dom");
+	assertEquals(url1Info["tld"], "tld");
+	assertEquals(url1Info["port"], "80");
+	assertEquals(url1Info["path"], "/path/to/file.ext");
+	assertEquals(url1Info["filename"], "file.ext");
+	assertEquals(url1Info["ext"], "ext");
+	assertEquals(url1Info["query"], "query");
+	assertEquals(url1Info["fragment"], "frag");
+	
+	const url2Info = easy.string.parse.url("localhost/page");
+	assertEquals(url2Info["protocol"], "");
+	assertEquals(url2Info["subdomain"], "");
+	assertEquals(url2Info["domain"], "localhost");
+	assertEquals(url2Info["tld"], "");
+	assertEquals(url2Info["port"], "");
+	assertEquals(url2Info["path"], "/page");
+	assertEquals(url2Info["filename"], "");
+	assertEquals(url2Info["ext"], "");
+	assertEquals(url2Info["query"], "");
+	assertEquals(url2Info["fragment"], "");
+	
+	const url3Info = easy.string.parse.url("somewhere.tld/page#frag");
+	assertEquals(url3Info["protocol"], "");
+	assertEquals(url3Info["subdomain"], "");
+	assertEquals(url3Info["domain"], "somewhere");
+	assertEquals(url3Info["tld"], "tld");
+	assertEquals(url3Info["port"], "");
+	assertEquals(url3Info["path"], "/page");
+	assertEquals(url3Info["filename"], "");
+	assertEquals(url3Info["ext"], "");
+	assertEquals(url3Info["query"], "");
+	assertEquals(url3Info["fragment"], "frag");
+	
+	const url4Info = easy.string.parse.url("localhost");
+	assertEquals(url4Info["protocol"], "");
+	assertEquals(url4Info["subdomain"], "");
+	assertEquals(url4Info["domain"], "localhost");
+	assertEquals(url4Info["tld"], "");
+	assertEquals(url4Info["port"], "");
+	assertEquals(url4Info["path"], "");
+	assertEquals(url4Info["filename"], "");
+	assertEquals(url4Info["ext"], "");
+	assertEquals(url4Info["query"], "");
+	assertEquals(url4Info["fragment"], "");
+	
+	const url5Info = easy.string.parse.url("http://example.com?var1=one");
+	assertEquals(url5Info["protocol"], "http");
+	assertEquals(url5Info["subdomain"], "");
+	assertEquals(url5Info["domain"], "example");
+	assertEquals(url5Info["tld"], "com");
+	assertEquals(url5Info["port"], "");
+	assertEquals(url5Info["path"], "");
+	assertEquals(url5Info["filename"], "");
+	assertEquals(url5Info["ext"], "");
+	assertEquals(url5Info["query"], "var1=one");
+	assertEquals(url5Info["fragment"], "");
+});
+
+Deno.test("easy.string.parse.urlQuery", () => {
+	const obj1 = easy.string.parse.urlQuery("?var1=one&var2=two&var3=three");
 	assertEquals(obj1["var1"], "one");
 	assertEquals(obj1["var2"], "two");
 	assertEquals(obj1["var3"], "three");
 	
-	const obj2 = easy.string.parse.urlParams("var4=four&var5=five&var6=six");
+	const obj2 = easy.string.parse.urlQuery("var4=four&var5=five&var6=six");
 	assertEquals(obj2["var4"], "four");
 	assertEquals(obj2["var5"], "five");
 	assertEquals(obj2["var6"], "six");
