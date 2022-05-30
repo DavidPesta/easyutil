@@ -331,3 +331,15 @@ Deno.test("easy.string.parse.boolean", () => {
 	const double07 = "007";
 	assertEquals(easy.string.parse.boolean(double07), false);
 });
+
+Deno.test("easy.string.parse.urlParams", () => {
+	const obj1 = easy.string.parse.urlParams("?var1=one&var2=two&var3=three");
+	assertEquals(obj1["var1"], "one");
+	assertEquals(obj1["var2"], "two");
+	assertEquals(obj1["var3"], "three");
+	
+	const obj2 = easy.string.parse.urlParams("var4=four&var5=five&var6=six");
+	assertEquals(obj2["var4"], "four");
+	assertEquals(obj2["var5"], "five");
+	assertEquals(obj2["var6"], "six");
+});

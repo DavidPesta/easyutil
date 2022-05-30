@@ -21,5 +21,9 @@ export default {
 		}
 		
 		return false;
+	},
+	
+	urlParams: (str: string): Record<string, string> => {
+		return Object.fromEntries(new URLSearchParams(str));
 	}
 }

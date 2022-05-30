@@ -5,7 +5,7 @@ A collection of useful utilities to make development with Deno even easier!
 ## Usage
 
 ```js
-import easy from "https://deno.land/x/easyutil@0.3.0/mod.ts";
+import easy from "https://deno.land/x/easyutil@0.4.0/mod.ts";
 ```
 
 The utilities are nested within modules in a way that aids natural language recognition and empowers the developer to drill down and find utilities by harnessing the IDE's intellisense on dot notation. Less looking through documentation and more productivity!
@@ -27,6 +27,7 @@ if (easy.string.isA.boolean(booleanStr)) ...
 const num = easy.string.parse.number(str);
 const int = easy.string.parse.integer(str);
 const bool = easy.string.parse.boolean(str);
+const obj = easy.string.parse.urlParams(str);
 ```
 
 ### String Trim
