@@ -1,3 +1,5 @@
+import { UrlInfo } from "../../types.ts";
+
 export default {
 	number: (str: string): number => {
 		if (str.trim() === "") return NaN;
@@ -23,90 +25,101 @@ export default {
 		return false;
 	},
 	
-	url: (str: string): Record<string, string> => {
+	url: (str: string): UrlInfo => {
 		let left, right;
 		
-		const result: Record<string, string> = {};
+		const result: UrlInfo = {
+			protocol: "",
+			subdomain: "",
+			domain: "",
+			tld: "",
+			port: "",
+			path: "",
+			filename: "",
+			ext: "",
+			query: "",
+			fragment: ""
+		};
 		
 		[left, right] = str.split("://");
 		if (right === undefined) {
-			result["protocol"] = "";
+			result.protocol = "";
 			str = left;
 		}
 		else {
-			result["protocol"] = left;
+			result.protocol = left;
 			str = right;
 		}
 		
 		[left, right] = str.split("#");
 		if (right === undefined) {
-			result["fragment"] = "";
+			result.fragment = "";
 		}
 		else {
-			result["fragment"] = right;
+			result.fragment = right;
 			str = left;
 		}
 		
 		[left, right] = str.split("?");
 		if (right === undefined) {
-			result["query"] = "";
+			result.query = "";
 		}
 		else {
-			result["query"] = right;
+			result.query = right;
 			str = left;
 		}
 		
 		const pathStart = str.indexOf("/");
 		if (pathStart === -1) {
-			result["path"] = "";
-			result["filename"] = "";
-			result["ext"] = "";
+			result.path = "";
+			result.filename = "";
+			result.ext = "";
 		}
 		else {
 			left = str.substring(0, pathStart);
 			right = str.substring(pathStart);
-			result["path"] = right;
+			result.path = right;
 			str = left;
 			const extStart = right.indexOf(".");
 			if (extStart === -1) {
-				result["filename"] = "";
-				result["ext"] = "";
+				result.filename = "";
+				result.ext = "";
 			}
 			else {
-				result["ext"] = right.substring(extStart + 1);
+				result.ext = right.substring(extStart + 1);
 				const filenameStart = right.lastIndexOf("/");
-				result["filename"] = right.substring(filenameStart + 1);
+				result.filename = right.substring(filenameStart + 1);
 			}
 		}
 		
 		[left, right] = str.split(":");
 		if (right === undefined) {
-			result["port"] = "";
+			result.port = "";
 		}
 		else {
-			result["port"] = right;
+			result.port = right;
 			str = left;
 		}
 		
 		const tldStart = str.lastIndexOf(".");
 		if (tldStart === -1) {
-			result["tld"] = "";
-			result["domain"] = str;
-			result["subdomain"] = "";
+			result.tld = "";
+			result.domain = str;
+			result.subdomain = "";
 			return result;
 		}
 		
-		result["tld"] = str.substring(tldStart + 1);
+		result.tld = str.substring(tldStart + 1);
 		str = str.substring(0, tldStart);
 		
 		const domainStart = str.lastIndexOf(".");
 		if (domainStart === -1) {
-			result["domain"] = str;
-			result["subdomain"] = "";
+			result.domain = str;
+			result.subdomain = "";
 		}
 		else {
-			result["subdomain"] = str.substring(0, domainStart);
-			result["domain"] = str.substring(domainStart + 1);
+			result.subdomain = str.substring(0, domainStart);
+			result.domain = str.substring(domainStart + 1);
 		}
 		
 		return result;
