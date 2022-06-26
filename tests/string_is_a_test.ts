@@ -1,5 +1,5 @@
 import easy from "../mod.ts";
-import { assert, assertFalse, assertThrows } from "https://deno.land/std@0.141.0/testing/asserts.ts";
+import { assert, assertFalse, assertThrows } from "https://deno.land/std@0.145.0/testing/asserts.ts";
 
 Deno.test("easy.string.isA.string", () => {
 	const str = "some string";

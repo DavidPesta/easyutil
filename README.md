@@ -5,7 +5,7 @@ A collection of useful utilities to make development with Deno even easier!
 ## Usage
 
 ```js
-import easy from "https://deno.land/x/easyutil@0.6.0/mod.ts";
+import easy from "https://deno.land/x/easyutil@0.7.0/mod.ts";
 ```
 
 The utilities are nested within modules in a way that aids natural language recognition and empowers the developer to drill down and find utilities by harnessing the IDE's intellisense on dot notation. Less looking through documentation and more productivity!
@@ -34,13 +34,20 @@ const obj = easy.string.parse.urlQuery("var1=one&var2=two&var3=three");
 ### String Trim
 
 ```js
-const trimmed = easy.string.trim.charsBoth(str, ['/', '\\']);
 const leftTrimmed = easy.string.trim.charsLeft(str, ['/', '\\']);
 const rightTrimmed = easy.string.trim.charsRight(str, ['/', '\\']);
+const trimmed = easy.string.trim.charsBoth(str, ['/', '\\']);
 
-const trimmed = easy.string.trim.wordBoth(str, 'word');
 const leftTrimmed = easy.string.trim.wordLeft(str, 'word');
 const rightTrimmed = easy.string.trim.wordRight(str, 'word');
+const trimmed = easy.string.trim.wordBoth(str, 'word');
+```
+
+### Array Convert To
+
+```js
+const keyedObjects = easy.array.convertTo.keyedObjects(arrObj, "theKey");
+const keyedValues = easy.array.convertTo.keyedValues(arrObj, "theKey", "theValue");
 ```
 
 ### Sleep

@@ -1,7 +1,9 @@
-import { sleep } from "./lib/sleep.ts";
 import string from "./lib/string/mod.ts";
+import array from "./lib/array/mod.ts";
+import { sleep } from "./lib/sleep.ts";
 
 export default {
+	string: string,
+	array: array,
 	sleep: sleep,
-	string: string
 }

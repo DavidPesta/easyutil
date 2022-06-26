@@ -5,5 +5,5 @@ import trim from "./trim.ts";
 export default {
 	isA: isA,
 	parse: parse,
-	trim: trim
+	trim: trim,
 }
