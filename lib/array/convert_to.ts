@@ -1,5 +1,3 @@
-import easy from "../../mod.ts";
-
 export default {
 	// deno-lint-ignore no-explicit-any
 	keyedObjects: (objArr: Array<Record<string, any>>, key: string): Record<string, Record<string, any>> => {
