@@ -5,7 +5,7 @@ A collection of useful utilities to make development with Deno even easier!
 ## Usage
 
 ```js
-import easy from "https://deno.land/x/easyutil@0.7.0/mod.ts";
+import easy from "https://deno.land/x/easyutil@0.8.0/mod.ts";
 ```
 
 The utilities are nested within modules in a way that aids natural language recognition and empowers the developer to drill down and find utilities by harnessing the IDE's intellisense on dot notation. Less looking through documentation and more productivity!
@@ -43,11 +43,19 @@ const rightTrimmed = easy.string.trim.wordRight(str, 'word');
 const trimmed = easy.string.trim.wordBoth(str, 'word');
 ```
 
-### Array Convert To
+### Object Array Group By Key
 
 ```js
-const keyedObjects = easy.array.convertTo.keyedObjects(arrObj, "theKey");
-const keyedValues = easy.array.convertTo.keyedValues(arrObj, "theKey", "theValue");
+const groupedObjects = easy.objectArray.groupBy(arrObj, "theKey");
+```
+
+### Object Array Convert To
+
+```js
+const keyedObjects = easy.objectArray.convertTo.keyedObjects(arrObj, "theKey");
+const keyedValues = easy.objectArray.convertTo.keyedValues(arrObj, "theKey", "theValue");
+const keyedObjectsFlat = easy.objectArray.convertTo.keyedObjectsFlat(arrObj, "theKey");
+const keyedValuesFlat = easy.objectArray.convertTo.keyedValuesFlat(arrObj, "theKey", "theValue");
 ```
 
 ### Sleep

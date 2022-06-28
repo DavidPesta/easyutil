@@ -1,4 +1,4 @@
-import easy from "https://deno.land/x/easyutil@0.7.0/mod.ts";
+import easy from "https://deno.land/x/easyutil@0.8.0/mod.ts";
 
 console.log("Before sleep");
 await easy.sleep(1000);
