@@ -57,6 +57,20 @@ Deno.test("easy.objectArray.groupBy", () => {
 	assertEquals(groupedObjects["obj3"][1]["extra"], 72);
 });
 
+Deno.test("easy.objectArray.flatGroupBy", () => {
+	const arrObj = exampleData();
+	const flatGroupedObjects = easy.objectArray.flatGroupBy(arrObj, "theKey");
+	
+	assertEquals(flatGroupedObjects.obj1.theKey, "obj1");
+	assertEquals(flatGroupedObjects["obj1"]["theKey"], "obj1");
+	
+	assertEquals(flatGroupedObjects.obj2.theValue, "val2-2");
+	assertEquals(flatGroupedObjects["obj2"]["theValue"], "val2-2");
+	
+	assertEquals(flatGroupedObjects.obj3.extra, 72);
+	assertEquals(flatGroupedObjects["obj3"]["extra"], 72);
+});
+
 Deno.test("easy.objectArray.convertTo.keyedObjects", () => {
 	const arrObj = exampleData();
 	const keyedObjects = easy.objectArray.convertTo.keyedObjects(arrObj, "theKey");
@@ -97,30 +111,30 @@ Deno.test("easy.objectArray.convertTo.keyedValues", () => {
 	assertEquals(keyedValues["obj3"][1], "val3-2");
 });
 
-Deno.test("easy.objectArray.convertTo.keyedObjectsFlat", () => {
+Deno.test("easy.objectArray.convertTo.flatKeyedObjects", () => {
 	const arrObj = exampleData();
-	const keyedObjectsFlat = easy.objectArray.convertTo.keyedObjectsFlat(arrObj, "theKey");
+	const flatKeyedObjects = easy.objectArray.convertTo.flatKeyedObjects(arrObj, "theKey");
 	
-	assertEquals(keyedObjectsFlat.obj1.theKey, "obj1");
-	assertEquals(keyedObjectsFlat["obj1"]["theKey"], "obj1");
+	assertEquals(flatKeyedObjects.obj1.theKey, "obj1");
+	assertEquals(flatKeyedObjects["obj1"]["theKey"], "obj1");
 	
-	assertEquals(keyedObjectsFlat.obj2.theValue, "val2-2");
-	assertEquals(keyedObjectsFlat["obj2"]["theValue"], "val2-2");
+	assertEquals(flatKeyedObjects.obj2.theValue, "val2-2");
+	assertEquals(flatKeyedObjects["obj2"]["theValue"], "val2-2");
 	
-	assertEquals(keyedObjectsFlat.obj3.extra, 72);
-	assertEquals(keyedObjectsFlat["obj3"]["extra"], 72);
+	assertEquals(flatKeyedObjects.obj3.extra, 72);
+	assertEquals(flatKeyedObjects["obj3"]["extra"], 72);
 });
 
-Deno.test("easy.objectArray.convertTo.keyedValuesFlat", () => {
+Deno.test("easy.objectArray.convertTo.flatKeyedValues", () => {
 	const arrObj = exampleData();
-	const keyedValuesFlat = easy.objectArray.convertTo.keyedValuesFlat(arrObj, "theKey", "theValue");
+	const flatKeyedValues = easy.objectArray.convertTo.flatKeyedValues(arrObj, "theKey", "theValue");
 	
-	assertEquals(keyedValuesFlat.obj1, "val1-2");
-	assertEquals(keyedValuesFlat["obj1"], "val1-2");
+	assertEquals(flatKeyedValues.obj1, "val1-2");
+	assertEquals(flatKeyedValues["obj1"], "val1-2");
 	
-	assertEquals(keyedValuesFlat.obj2, "val2-2");
-	assertEquals(keyedValuesFlat["obj2"], "val2-2");
+	assertEquals(flatKeyedValues.obj2, "val2-2");
+	assertEquals(flatKeyedValues["obj2"], "val2-2");
 	
-	assertEquals(keyedValuesFlat.obj3, "val3-2");
-	assertEquals(keyedValuesFlat["obj3"], "val3-2");
+	assertEquals(flatKeyedValues.obj3, "val3-2");
+	assertEquals(flatKeyedValues["obj3"], "val3-2");
 });

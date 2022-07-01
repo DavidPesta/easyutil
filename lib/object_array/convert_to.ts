@@ -26,30 +26,30 @@ export default {
 	},
 	
 	// deno-lint-ignore no-explicit-any
-	keyedObjectsFlat: (objArr: Array<Record<string, any>>, key: string): Record<string, Record<string, any>> => {
+	flatKeyedObjects: (objArr: Array<Record<string, any>>, key: string): Record<string, Record<string, any>> => {
 		//return Object.assign({}, ...objects.map(x => ({[x.key]: x})));
 		
 		// deno-lint-ignore no-explicit-any
-		const keyedObjectsFlat: Record<string, Record<string, any>> = {};
+		const flatKeyedObjects: Record<string, Record<string, any>> = {};
 		
 		for (const obj of objArr) {
-			keyedObjectsFlat[obj[key]] = obj;
+			flatKeyedObjects[obj[key]] = obj;
 		}
 		
-		return keyedObjectsFlat;
+		return flatKeyedObjects;
 	},
 	
 	// deno-lint-ignore no-explicit-any
-	keyedValuesFlat: (objArr: Array<Record<string, any>>, key: string, val: string): Record<string, any> => {
+	flatKeyedValues: (objArr: Array<Record<string, any>>, key: string, val: string): Record<string, any> => {
 		//return Object.assign({}, ...objects.map(x => ({[x.key]: x.val})));
 		
 		// deno-lint-ignore no-explicit-any
-		const keyedValuesFlat: Record<string, any> = {};
+		const flatKeyedValues: Record<string, any> = {};
 		
 		for (const obj of objArr) {
-			keyedValuesFlat[obj[key]] = obj[val];
+			flatKeyedValues[obj[key]] = obj[val];
 		}
 		
-		return keyedValuesFlat;
+		return flatKeyedValues;
 	},
 }
