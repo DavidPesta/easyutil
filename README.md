@@ -45,7 +45,7 @@ const trimmed = easy.string.trim.wordBoth(str, 'word');
 
 ### Array Union
 ```js
-const ingredients = easy.array.union(['Pepper', 'Carrots', 'Leek'], ['Carrots', 'Radicchio', 'Pepper']);
+const numbers = easy.array.union([1, 2, 3], [4, 5, 6], [7, 8, 9]);
 ```
 
 ### Object Array Group By Key
