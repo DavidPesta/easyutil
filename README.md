@@ -71,6 +71,16 @@ const filePath = easy.fileSystem.pathToScript.file();
 const directoryPath = easy.fileSystem.pathToScript.directory();
 ```
 
+### Cryptography
+
+```js
+import easy from "https://deno.land/x/easyutil@0.10.0/mod.ts";
+import { HashAlgorithm } from "https://deno.land/x/easyutil@0.10.0/types.ts";
+
+const md5hash = await easy.cryptography.hash(HashAlgorithm.MD5, "testing 123");
+const sha1hash = await easy.cryptography.hash(HashAlgorithm.SHA_1, "testing 123");
+```
+
 ### Sleep
 
 ```js
